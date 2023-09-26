@@ -1,12 +1,20 @@
 import {HiMenuAlt1,HiX} from 'react-icons/hi'
 import NavLink from './NavLink'
 import {navLinks} from '../../../Data'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MobileNavLink from './MobileNavLink'
 const Navbar = () => {
   const [toggol,setToggle]=useState(false)
+  const [active,setactive]=useState(null)
+  useEffect(()=>{
+    const scrollActive =()=>{
+      setactive(window.scrollY>20)
+    }
+    window.addEventListener("scroll",scrollActive)
+    return ()=>window.removeEventListener("scroll",scrollActive)
+  },[active])
   return (
-    <div className='fixed w-full top-0 left-0 z-20'>
+    <div className={`${active?'shadow-lg bg-Solitude':''} fixed w-full top-0 left-0 z-20  `}>
       <div className='container py-4 mx-auto flex items-center justify-between px-2'>
         <div className='flex  items-center gap-4'>
           <HiMenuAlt1
