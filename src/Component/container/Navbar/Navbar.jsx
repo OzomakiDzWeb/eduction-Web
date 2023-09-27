@@ -3,6 +3,7 @@ import NavLink from './NavLink'
 import {navLinks} from '../../../Data'
 import { useEffect, useState } from 'react'
 import MobileNavLink from './MobileNavLink'
+import {motion} from 'framer-motion'
 const Navbar = () => {
   const [toggol,setToggle]=useState(false)
   const [active,setactive]=useState(null)
@@ -33,7 +34,12 @@ const Navbar = () => {
         className='py-3 px-6 font-bold text-sm border border-solid rounded-lg border-gray'>
           Sgin Un
         </button>
-        {toggol && (<div className='fixed h-full w-96 top-0 left-0 bg-Teal text-white flex flex-col justify-center items-center shadow-lg gap-8 py-8  '>
+        {toggol && (
+        <motion.div
+          initial={{x:-500,opacity:0}}
+          animate={{x:0,opacity:1}}
+          transition={{duration:0.3}}
+          className='fixed h-full w-96 top-0 left-0 bg-Teal text-white flex flex-col justify-center items-center shadow-lg gap-8 py-8  '>
           {navLinks.map((link,idx)=>{
           return  <MobileNavLink 
                     key={idx} 
@@ -42,7 +48,7 @@ const Navbar = () => {
           })}
           <HiX className="absolute right-12 top-12 text-3xl cursor-pointer"
                onClick={()=>setToggle(!toggol)}Hix/>
-        </div>)}
+        </motion.div>)}
       </div>
     </div>
   )
